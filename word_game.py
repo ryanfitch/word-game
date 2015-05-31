@@ -1,14 +1,16 @@
-word_list = ['apple']
+import random
+
+word_list = ['apple', 'banana', 'cantaloupe', 'date', 'elderberry', 'fig']
 lives = 3
 characters = []
 game_output = []
 
-win = False
+running = True
 
 
 def get_word():
   # eventually get a random word from a list of words
-  return word_list[0]
+  return word_list[random.randint(0, len(word_list)-1)]
 
 def split_word(_word):
   return list(_word)
@@ -29,9 +31,9 @@ def check_game_state():
     if game_output[i] == letter:
       score += 1
   if score == len(characters):
-    return True
-  else:
     return False
+  else:
+    return True
 
 
 characters = split_word(get_word())
@@ -40,12 +42,8 @@ game_output = create_game(characters)
 print("Make a guess: ")
 print(game_output)
 
-while win == False:
+while running:
   _input = input()
   check_guess(_input)
   print(game_output)
-  win = check_game_state()
-
-
-
-
+  running = check_game_state()
